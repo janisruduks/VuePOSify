@@ -1,18 +1,24 @@
 <template>
   <v-responsive class="align-center text-center">
     <v-container>
+      <Selector
+        v-model="selection"
+        :items="categoryData"
+        :enable-sub="false"
+        label="Filter category"
+      />
+    </v-container>
+    <slot></slot>
+    <v-container>
       <v-row>
-        <v-col v-for="(item, i) in itemData" :key="i" cols="12" md="3">
-          <v-card
-            :title="item.title"
-            :text="item.desc"
-            class="rounded-shape pa-3 ma-3"
-            @click="cartAdd(item)"
-          >
-            <v-img height="100" :src="item.url"></v-img>
-            <v-card-item>
-              <v-btn>{{ item.price }}$</v-btn>
-            </v-card-item>
+        <v-col v-for="(item, i) in categoryFilter" :key="i" cols="12" md="3">
+          <v-card class="pa-3 rounded" @click="cartAdd(item)">
+            <v-img height="200" :src="item.url"></v-img>
+            <v-card-title>{{ item.title }}</v-card-title>
+            <v-card-text>{{ item.desc }}</v-card-text>
+            <v-btn class="ma-3" variant="outlined"
+              >price: {{ item.price }}$</v-btn
+            >
           </v-card>
         </v-col>
       </v-row>
@@ -23,12 +29,14 @@
 <script lang="ts">
 import { itemData, Item } from "@/store/modules/items";
 import { cartData } from "@/store/modules/cart";
+import { categoryData } from "@/store/modules/categories";
+import Selector from "@/components/category/Selector.vue";
 export default {
+  data: () => ({
+    selection: "all",
+  }),
   setup() {
-    return {
-      itemData,
-      cartData,
-    };
+    return { itemData, cartData, categoryData };
   },
   methods: {
     cartAdd(item: Item) {
@@ -39,11 +47,32 @@ export default {
       }
     },
   },
-    created() {
-      const storeItems = localStorage.getItem('items');
-      if (storeItems) {
-        itemData.value = JSON.parse(storeItems);
-      }
+  created() {
+    const storeItems = localStorage.getItem("items");
+    if (storeItems) {
+      itemData.value = JSON.parse(storeItems);
     }
+    const storeCategories = localStorage.getItem("category");
+    if (storeCategories) {
+      categoryData.value = JSON.parse(storeCategories);
+    }
+  },
+  watch: {
+        categoryData: {
+      handler(newCategory) {
+        localStorage.setItem("category", JSON.stringify(newCategory));
+      },
+      deep: true,
+    },
+  },
+  computed: {
+    categoryFilter() {
+      if (this.selection === "all") {
+        return itemData.value;
+      }
+      return itemData.value.filter((item) => item.category === this.selection);
+    },
+  },
+  components: { Selector },
 };
 </script>

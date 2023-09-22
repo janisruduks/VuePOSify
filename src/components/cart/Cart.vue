@@ -8,19 +8,14 @@
       max-height="600"
       title="Receipt"
     >
-      <v-select
-        class="pa-3"
-        variant="outlined"
+      <Selector
         v-model="selection"
-        label="Select table"
         :items="tableData"
+        :enable-sub="true"
+        label="Select table"
         item-title="name"
-      >
-        <template v-slot:item="{ props, item }">
-          <v-list-item v-bind="props" :subtitle="item.raw.status"></v-list-item>
-        </template>
-      </v-select>
-      <CartItems :selection="selection"/>
+      />
+      <CartItems :selection="selection" />
     </v-card>
   </v-fade-transition>
 </template>
@@ -36,31 +31,33 @@
 </style>
 
 <script lang="ts">
+import Selector from "../category/Selector.vue";
 import CartItems from "./CartItems.vue";
 import { tableData } from "@/store/modules/tables";
 
 export default {
   data: () => ({
-    selection: '',
+    selection: "",
   }),
   props: {
     cart: {
       type: Boolean,
       required: true,
-    } 
+    },
   },
   methods: {
     isCartOpen() {
-      this.$emit('update:cart', !this.cart)
-    }
+      this.$emit("update:cart", !this.cart);
+    },
   },
   setup() {
     return {
       tableData,
-    }
+    };
   },
   components: {
     CartItems,
+    Selector,
   },
-}
+};
 </script>

@@ -78,11 +78,5 @@ export default {
       deep: true,
     }
   },
-  // created() {
-  //   const storeTables = localStorage.getItem('table');
-  //   if (storeTables) {
-  //     tableData.value = JSON.parse(storeTables);
-  //   }
-  // }
 };
 </script>

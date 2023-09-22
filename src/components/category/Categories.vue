@@ -1,20 +1,16 @@
 <template>
   <v-responsive class="align-center text-center">
-    <v-container style="display: flex;">
-
-    <v-select
-      class="pa-3"
-      variant="outlined"
-      v-model="selection"
-      label="Select category"
-      :items="categoryData"
+    <v-container style="display: flex">
+      <Selector
+        v-model="selection"
+        :items="categoryData"
+        :enable-sub="false"
+        label="Select category"
         item-title="name"
+      />
+      <v-btn @click="deleteCategory" class="ma-5" variant="outlined"
+        >delete</v-btn
       >
-        <template v-slot:item="{ props }">
-          <v-list-item v-bind="props"></v-list-item>
-        </template>
-    </v-select>
-    <v-btn @click="deleteCategory" class="ma-5" variant="outlined">delete</v-btn>
     </v-container>
     <v-container>
       <v-row>
@@ -50,6 +46,7 @@
 <script lang="ts">
 import { categoryData } from "@/store/modules/categories";
 import { itemData, Item } from "@/store/modules/items";
+import Selector from "./Selector.vue";
 
 export default {
   data: () => ({
@@ -69,8 +66,12 @@ export default {
       }
     },
     deleteCategory() {
-      const categoryToDelete = this.categoryData.find(category => category.name === this.selection);
-      const index = this.categoryData.findIndex((item) => item === categoryToDelete);
+      const categoryToDelete = this.categoryData.find(
+        (category) => category.name === this.selection
+      );
+      const index = this.categoryData.findIndex(
+        (item) => item === categoryToDelete
+      );
       if (index !== -1) {
         this.categoryData.splice(index, 1);
       }
@@ -79,8 +80,12 @@ export default {
   },
   computed: {
     categoryFilter() {
+      if (this.selection === "all") {
+        return itemData.value;
+      }
       return itemData.value.filter((item) => item.category === this.selection);
     },
   },
+  components: { Selector },
 };
 </script>

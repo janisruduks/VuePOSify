@@ -2,17 +2,17 @@
   <v-app-bar>
     <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
     <v-app-bar-title>
-      <v-btn href="/"> Cool Project v.01 </v-btn>
+      <v-btn href="/" variant="outlined">POSify</v-btn>
     </v-app-bar-title>
-    <div>
-      <v-btn @click.stop="table = !table" prepend-icon="mdi-room-service">
+    <div class="ma-3">
+      <v-btn variant="outlined" size="small" @click.stop="table = !table" prepend-icon="mdi-room-service">
         tables
         <template v-slot:append>
           <p>{{ activeTables() }}</p>
         </template>
       </v-btn>
     </div>
-    <v-btn @click.stop="cart = !cart" prepend-icon="mdi-cart">
+    <v-btn variant="outlined" size="small" @click.stop="cart = !cart" prepend-icon="mdi-cart">
       Cart
       <template v-slot:append>
         {{ cartData.length }}

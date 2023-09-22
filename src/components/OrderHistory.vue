@@ -92,14 +92,6 @@ export default {
       toggleOverlay,
     };
   },
-  // watch: {
-  //   orderHistoryData: {
-  //     handler(newHistoryData) {
-  //       localStorage.setItem('history', JSON.stringify(newHistoryData));
-  //     },
-  //     deep: true,
-  //   }
-  // },
   created() {
       const storeHistoryData = localStorage.getItem('history');
       if (storeHistoryData) {

@@ -21,14 +21,14 @@ const tables: Table[] = [
     },
     {
         name: "2",
-        status: "Occupied",
+        status: "Available",
         bill: [],
         timeOpen: new Date(),
         total: 0,
     },
     {
         name: "3",
-        status: "Paid",
+        status: "Available",
         bill: [],
         timeOpen: new Date(),
         total: 0,

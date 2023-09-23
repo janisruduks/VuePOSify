@@ -33,6 +33,11 @@
             title="Orders"
             href="/orders"
           ></v-list-item>
+          <v-list-item
+            prepend-icon="mdi-room-service"
+            title="Tables"
+            href="/tables"
+          ></v-list-item>
         </v-list>
       </v-navigation-drawer>
 

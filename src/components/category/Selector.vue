@@ -10,13 +10,13 @@
     <template v-slot:item="{ props, item }">
       <v-list-item
         v-bind="props"
-        :subtitle="enableSub ? item.raw.status : '' "
+        :subtitle="enableSub ? item.raw.status : ''"
       ></v-list-item>
     </template>
   </v-select>
 </template>
 <script lang="ts">
-import { PropType } from 'vue';
+import { PropType } from "vue";
 
 export default {
   props: {

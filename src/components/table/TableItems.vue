@@ -15,7 +15,9 @@
             <td>{{ table.status }}</td>
             <td>
               <v-btn
-                :disabled="table.status === 'Paid' || table.status === 'Available'"
+                :disabled="
+                  table.status === 'Paid' || table.status === 'Available'
+                "
                 @click="changeStatusToPaid(table)"
                 size="small"
                 class="ma-3"
@@ -23,12 +25,17 @@
                 >paid</v-btn
               >
               <v-btn
-                :disabled="table.status === 'Occupied' || table.status === 'Available'"
+                :disabled="
+                  table.status === 'Occupied' || table.status === 'Available'
+                "
                 @click="makeTableAvailable(table)"
                 size="small"
                 variant="outlined"
                 >available</v-btn
               >
+            </td>
+            <td>
+              <slot name="table" v-bind="{ table, i }"></slot>
             </td>
           </tr>
         </tbody>
@@ -43,12 +50,13 @@ import { orderHistoryData, OrderHistory } from "@/store/modules/orderHistory";
 export default {
   setup() {
     return {
-      tableData, orderHistoryData,
+      tableData,
+      orderHistoryData,
     };
   },
   methods: {
     makeTableAvailable(table: Table) {
-      table.status = 'Available';
+      table.status = "Available";
       const completeOrder: OrderHistory = {
         id: "123abc",
         tableName: table.name,
@@ -56,27 +64,28 @@ export default {
         timeOpen: table.timeOpen,
         timeClose: new Date(),
         total: table.total,
-      } 
+      };
       orderHistoryData.value.push(completeOrder);
       table.bill = [];
+      table.total = 0;
     },
     changeStatusToPaid(table: Table) {
-      table.status = 'Paid';
+      table.status = "Paid";
     },
   },
   watch: {
     tableData: {
       handler(newTableData) {
-        localStorage.setItem('table', JSON.stringify(newTableData));
+        localStorage.setItem("table", JSON.stringify(newTableData));
       },
       deep: true,
     },
     orderHistoryData: {
       handler(newHistoryData) {
-        localStorage.setItem('history', JSON.stringify(newHistoryData));
+        localStorage.setItem("history", JSON.stringify(newHistoryData));
       },
       deep: true,
-    }
+    },
   },
 };
 </script>

@@ -5,15 +5,23 @@
       <v-btn href="/" variant="outlined">POSify</v-btn>
     </v-app-bar-title>
     <div class="ma-3">
-      <v-btn variant="outlined" size="small" @click.stop="table = !table" prepend-icon="mdi-room-service">
-        tables
+      <v-btn
+        variant="outlined"
+        size="small"
+        @click.stop="table = !table"
+        prepend-icon="mdi-room-service"
+      >
         <template v-slot:append>
           <p>{{ activeTables() }}</p>
         </template>
       </v-btn>
     </div>
-    <v-btn variant="outlined" size="small" @click.stop="cart = !cart" prepend-icon="mdi-cart">
-      Cart
+    <v-btn
+      variant="outlined"
+      size="small"
+      @click.stop="cart = !cart"
+      prepend-icon="mdi-cart"
+    >
       <template v-slot:append>
         {{ cartData.length }}
       </template>
@@ -35,12 +43,11 @@
   <TableCard :cardToggle="table" />
 </template>
 
-
 <script lang="ts">
 import Cart from "@/components/cart/Cart.vue";
 import TableCard from "@/components/table/TableCard.vue";
 import NavPanel from "@/components/NavPanel.vue";
-import { cartData } from "@/store/modules/cart"
+import { cartData } from "@/store/modules/cart";
 import { tableData } from "@/store/modules/tables";
 
 export default {
@@ -55,7 +62,7 @@ export default {
       drawer: false,
       cart: false,
       table: false,
-      selection: '',
+      selection: "",
     };
   },
   methods: {

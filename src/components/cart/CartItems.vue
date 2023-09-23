@@ -21,14 +21,17 @@
             <td>
               <v-icon
                 icon="mdi-minus-circle"
+                size="small"
                 @click.stop="decrementQuantity(cartItem)"
               ></v-icon>
               <v-icon
                 icon="mdi-plus-circle"
+                size="small"
                 @click.stop="incrementQuantity(cartItem)"
               ></v-icon>
               <v-icon
                 icon="mdi-close-circle"
+                size="small"
                 @click.stop="removeItem(cartItem)"
               ></v-icon>
             </td>
@@ -70,9 +73,9 @@ export default {
       );
       if (table) {
         table.status = "Occupied";
-        table.bill = cartData.value;
+        table.bill = cartData.value.concat(table.bill);
         table.timeOpen = new Date();
-        table.total = this.totalSum();
+        table.total += this.totalSum();
         cartData.value = [];
       }
     },
@@ -120,10 +123,16 @@ export default {
     },
     orderHistoryData: {
       handler(newHistoryData) {
-        localStorage.setItem('history', JSON.stringify(newHistoryData));
+        localStorage.setItem("history", JSON.stringify(newHistoryData));
       },
       deep: true,
-    }
+    },
+    tableData: {
+      handler(newTableData) {
+        localStorage.setItem("table", JSON.stringify(newTableData));
+      },
+      deep: true,
+    },
   },
   created() {
     const storeHistoryData = localStorage.getItem("history");

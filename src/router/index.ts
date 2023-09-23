@@ -1,41 +1,51 @@
 // Composables
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
-    path: '/',
-    component: () => import('@/layouts/default/Default.vue'),
+    path: "/",
+    component: () => import("@/layouts/default/Default.vue"),
     children: [
       {
-        path: '',
-        name: 'Home',
+        path: "",
+        name: "Home",
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
+        component: () =>
+          import(/* webpackChunkName: "home" */ "@/views/Home.vue"),
       },
       {
-        path: '/about',
-        name: 'About',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/About.vue'),
+        path: "/about",
+        name: "About",
+        component: () =>
+          import(/* webpackChunkName: "home" */ "@/views/About.vue"),
       },
       {
-        path: '/items',
-        name: 'Items',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Items.vue'),
+        path: "/items",
+        name: "Items",
+        component: () =>
+          import(/* webpackChunkName: "home" */ "@/views/Items.vue"),
       },
       {
-        path: '/orders',
-        name: 'Orders',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Orders.vue'),
+        path: "/orders",
+        name: "Orders",
+        component: () =>
+          import(/* webpackChunkName: "home" */ "@/views/Orders.vue"),
+      },
+      {
+        path: "/tables",
+        name: "Tables",
+        component: () =>
+          import(/* webpackChunkName: "home" */ "@/views/Tables.vue"),
       },
     ],
   },
-]
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
-})
+});
 
-export default router
+export default router;

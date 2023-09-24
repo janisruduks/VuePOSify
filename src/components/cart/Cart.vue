@@ -4,7 +4,7 @@
       v-if="cart"
       class="cart-card pa-3"
       elevation="16"
-      max-width="500"
+      max-width="400"
       max-height="600"
       title="Receipt"
     >

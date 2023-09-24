@@ -77,7 +77,6 @@
 <script lang="ts">
 import { ref } from "vue";
 import { orderHistoryData } from "@/store/modules/orderHistory";
-
 export default {
   setup() {
     const overlay = ref(new Array(orderHistoryData.value.length).fill(false));

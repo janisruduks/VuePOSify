@@ -4,10 +4,10 @@
       <v-table>
         <thead>
           <tr>
-            <th class="text-left">Name</th>
-            <th class="text-left">Price</th>
-            <th class="text-left">Quantity</th>
-            <th class="text-left">Total</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-center">Total</th>
           </tr>
         </thead>
         <tbody>

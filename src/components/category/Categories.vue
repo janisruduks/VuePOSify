@@ -1,37 +1,22 @@
 <template>
-  <v-responsive class="align-center text-center">
-    <v-container style="display: flex">
-      <Selector
-        v-model="selection"
-        :items="categoryData"
-        :enable-sub="false"
-        label="Select category"
-        item-title="name"
-      />
-      <v-btn @click="deleteCategory" class="ma-5" variant="outlined"
-        >delete</v-btn
+  <ItemSearch :card-click="hello" category="all">
+    <template #main="slotProps">
+      <v-btn
+        @click="deleteCategory(slotProps.selection)"
+        class="ma-5"
+        variant="outlined"
+        >delete selected category</v-btn
       >
-    </v-container>
-    <v-container>
-      <v-row>
-        <v-col v-for="(item, i) in categoryFilter" :key="i" cols="12" md="3">
-          <v-card class="rounded-shape">
-            <v-btn
-              @click="deleteItem(item)"
-              icon="mdi-delete"
-              class="delete-button ma-1"
-            ></v-btn>
-            <v-img height="200" :src="item.url"></v-img>
-            <v-card-title>{{ item.title }}</v-card-title>
-            <v-card-text>{{ item.desc }}</v-card-text>
-            <v-btn class="ma-3" variant="outlined"
-              >price: {{ item.price }}$</v-btn
-            >
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-responsive>
+    </template>
+    <template #card="slotProps">
+      <v-btn
+        @click="deleteItem(slotProps.item)"
+        icon="mdi-delete"
+        class="delete-button ma-1"
+        style="z-index: 9999"
+      ></v-btn>
+    </template>
+  </ItemSearch>
 </template>
 
 <style>
@@ -46,12 +31,9 @@
 <script lang="ts">
 import { categoryData } from "@/store/modules/categories";
 import { itemData, Item } from "@/store/modules/items";
-import Selector from "./Selector.vue";
+import ItemSearch from "@/components/item/ItemSearch.vue";
 
 export default {
-  data: () => ({
-    selection: "",
-  }),
   setup() {
     return {
       itemData,
@@ -59,15 +41,15 @@ export default {
     };
   },
   methods: {
+    hello() {},
     deleteItem(itemToDelete: Item) {
       const index = this.itemData.findIndex((item) => item === itemToDelete);
-      if (index !== -1) {
-        this.itemData.splice(index, 1);
-      }
+      this.itemData.splice(index, 1);
     },
-    deleteCategory() {
+    deleteCategory(selected: string) {
+      console.log(selected);
       const categoryToDelete = this.categoryData.find(
-        (category) => category.name === this.selection
+        (category) => category.name === selected
       );
       const index = this.categoryData.findIndex(
         (item) => item === categoryToDelete
@@ -75,17 +57,8 @@ export default {
       if (index !== -1) {
         this.categoryData.splice(index, 1);
       }
-      this.selection = "";
     },
   },
-  computed: {
-    categoryFilter() {
-      if (this.selection === "all") {
-        return itemData.value;
-      }
-      return itemData.value.filter((item) => item.category === this.selection);
-    },
-  },
-  components: { Selector },
+  components: { ItemSearch },
 };
 </script>

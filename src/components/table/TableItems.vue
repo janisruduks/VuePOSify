@@ -4,9 +4,8 @@
       <v-table>
         <thead>
           <tr>
-            <th class="text-left">Name</th>
-            <th class="text-left">Status</th>
-            <th class="text-left">Actions</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Status</th>
           </tr>
         </thead>
         <tbody>
@@ -14,24 +13,27 @@
             <td>{{ table.name }}</td>
             <td>{{ table.status }}</td>
             <td>
+
               <v-btn
                 :disabled="
                   table.status === 'Paid' || table.status === 'Available'
                 "
                 @click="changeStatusToPaid(table)"
+                icon="mdi-cash-fast"
                 size="small"
                 class="ma-3"
-                variant="outlined"
-                >paid</v-btn
-              >
+                variant="text"
+                >
+              </v-btn>
               <v-btn
                 :disabled="
                   table.status === 'Occupied' || table.status === 'Available'
                 "
                 @click="makeTableAvailable(table)"
                 size="small"
-                variant="outlined"
-                >available</v-btn
+                variant="text"
+                icon="mdi-table-chair"
+                ></v-btn
               >
             </td>
             <td>

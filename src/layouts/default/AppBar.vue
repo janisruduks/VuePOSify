@@ -46,7 +46,7 @@
 <script lang="ts">
 import Cart from "@/components/cart/Cart.vue";
 import TableCard from "@/components/table/TableCard.vue";
-import NavPanel from "@/components/NavPanel.vue";
+import NavPanel from "@/components/navigation/NavPanel.vue";
 import { cartData } from "@/store/modules/cart";
 import { tableData } from "@/store/modules/tables";
 

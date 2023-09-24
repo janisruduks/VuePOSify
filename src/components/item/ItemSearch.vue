@@ -8,15 +8,20 @@
         label="Filter category"
       />
     </v-container>
-    <slot></slot>
+    <slot name="main" :selection="selection"></slot>
     <v-container>
       <v-row>
         <v-col v-for="(item, i) in categoryFilter" :key="i" cols="12" md="3">
-          <v-card class="pa-3 rounded" @click="cartAdd(item)">
+          <v-card
+            variant="outlined"
+            class="rounded"
+            @click="cardClick(item)"
+          >
+            <slot name="card" :card="item"></slot>
             <v-img height="200" :src="item.url"></v-img>
             <v-card-title>{{ item.title }}</v-card-title>
             <v-card-text>{{ item.desc }}</v-card-text>
-            <v-btn class="ma-3" variant="outlined"
+            <v-btn class="ma-2" variant="outlined"
               >price: {{ item.price }}$</v-btn
             >
           </v-card>
@@ -32,8 +37,18 @@ import { cartData } from "@/store/modules/cart";
 import { categoryData } from "@/store/modules/categories";
 import Selector from "@/components/category/Selector.vue";
 export default {
+  props: {
+    cardClick: {
+      type: Function,
+      required: true,
+    },
+    category: {
+      type: String,
+      required: true,
+    },
+  },
   data: () => ({
-    selection: "all",
+    selection: 'all',
   }),
   setup() {
     return { itemData, cartData, categoryData };
@@ -58,7 +73,7 @@ export default {
     }
   },
   watch: {
-        categoryData: {
+    categoryData: {
       handler(newCategory) {
         localStorage.setItem("category", JSON.stringify(newCategory));
       },
@@ -71,6 +86,9 @@ export default {
         return itemData.value;
       }
       return itemData.value.filter((item) => item.category === this.selection);
+    },
+    getSelection() {
+      return this.selection;
     },
   },
   components: { Selector },

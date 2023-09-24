@@ -26,6 +26,7 @@
         {{ cartData.length }}
       </template>
     </v-btn>
+    <ThemeSwitcher />
   </v-app-bar>
   <NavPanel :drawer="drawer">
     <v-main
@@ -33,7 +34,6 @@
         height: 100%;
         padding-top: 5%;
         padding-bottom: 5%;
-        background-color: #f5f5f5;
       "
     >
       <slot></slot>
@@ -47,6 +47,7 @@
 import Cart from "@/components/cart/Cart.vue";
 import TableCard from "@/components/table/TableCard.vue";
 import NavPanel from "@/components/navigation/NavPanel.vue";
+import ThemeSwitcher from "@/components/ThemeSwitcher.vue"
 import { cartData } from "@/store/modules/cart";
 import { tableData } from "@/store/modules/tables";
 
@@ -76,6 +77,7 @@ export default {
     Cart,
     TableCard,
     NavPanel,
+    ThemeSwitcher,
   },
 };
 </script>

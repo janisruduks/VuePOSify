@@ -46,7 +46,6 @@
           height: 100%;
           padding-top: 5%;
           padding-bottom: 5%;
-          background-color: #f5f5f5;
         "
       >
         <slot></slot>

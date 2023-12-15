@@ -8,28 +8,33 @@
         label="Filter category"
       />
     </v-container>
-    <slot name="main" :selection="selection"></slot>
+    <slot name="main" :selection="selection" />
     <v-container>
       <v-row>
         <v-col v-for="(item, i) in categoryFilter" :key="i" cols="12" md="3">
           <v-card
             variant="outlined"
-            class="rounded"
+            class="rounded my-card"
             @click="cardClick(item)"
           >
             <slot name="card" :card="item"></slot>
-            <v-img height="200" :src="item.url"></v-img>
             <v-card-title>{{ item.title }}</v-card-title>
             <v-card-text>{{ item.desc }}</v-card-text>
-            <v-btn class="ma-2" variant="outlined"
-              >price: {{ item.price }}$</v-btn
-            >
           </v-card>
+          <v-btn class="ma-2" variant="outlined"
+            >price: {{ item.price }}$</v-btn
+          >
         </v-col>
       </v-row>
     </v-container>
   </v-responsive>
 </template>
+
+<style>
+.my-card {
+  height: 200px;
+}
+</style>
 
 <script lang="ts">
 import { itemData, Item } from "@/store/modules/items";
@@ -48,7 +53,7 @@ export default {
     },
   },
   data: () => ({
-    selection: 'all',
+    selection: "all",
   }),
   setup() {
     return { itemData, cartData, categoryData };
